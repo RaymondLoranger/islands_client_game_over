@@ -24,7 +24,8 @@ defmodule Islands.Client.GameOver do
     Summary.display(state)
     ANSI.puts(message)
     Engine.end_game(game_name)
-    clear_messages()
+    # clear_messages()
+    :lib.flush_receive()
     self() |> Process.exit(:normal)
   end
 
@@ -32,12 +33,12 @@ defmodule Islands.Client.GameOver do
   def message(%State{tally: %Tally{request: request}} = state),
     do: Message.new(state, request)
 
-  @spec clear_messages :: :ok
-  def clear_messages do
-    receive do
-      _ -> clear_messages()
-    after
-      0 -> :ok
-    end
-  end
+  # @spec clear_messages :: :ok
+  # def clear_messages do
+  #   receive do
+  #     _ -> clear_messages()
+  #   after
+  #     0 -> :ok
+  #   end
+  # end
 end
