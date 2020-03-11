@@ -7,7 +7,7 @@ defmodule Islands.Client.GameOver do
   @course_ref Application.get_env(@app, :course_ref)
 
   @moduledoc """
-  Handles a **game over** state in the _Game of Islands_.
+  Handles a _game over_ state in the _Game of Islands_.
   \n##### #{@course_ref}
   """
 
