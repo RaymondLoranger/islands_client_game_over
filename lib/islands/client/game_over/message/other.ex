@@ -9,7 +9,7 @@ defmodule Islands.Client.GameOver.Message.Other do
       :light_white,
       "Game over for an unknown reason...",
       :reset,
-      "\nState: #{inspect(state, pretty: true)}"
+      "\nState: #{inspect(state)}"
     ]
   end
 end
