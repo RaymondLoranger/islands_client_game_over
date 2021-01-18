@@ -10,7 +10,7 @@ defmodule Islands.Client.GameOver do
 
   alias __MODULE__.Message
   alias IO.ANSI.Plus, as: ANSI
-  alias Islands.Client.{State, Summary}
+  alias Islands.Client.State
   alias Islands.{Engine, Tally}
 
   @spec end_game(State.t()) :: no_return
@@ -18,10 +18,10 @@ defmodule Islands.Client.GameOver do
 
   @spec end_game(ANSI.ansilist(), State.t()) :: no_return
   def end_game(message, %State{game_name: game_name} = state) do
-    Summary.display(state)
-    ANSI.puts(message)
-    Engine.end_game(game_name)
-    clear_messages()
+    :ok = Tally.summary(state.tally, state.player_id)
+    :ok = ANSI.puts(message)
+    :ok = Engine.end_game(game_name)
+    :ok = clear_messages()
     self() |> Process.exit(:normal)
   end
 

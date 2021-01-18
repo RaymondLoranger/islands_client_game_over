@@ -50,7 +50,6 @@ defmodule Islands.Client.GameOver.MixProject do
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:io_ansi_plus, "~> 0.1"},
       {:islands_client_state, "~> 0.1"},
-      {:islands_client_summary, "~> 0.1"},
       {:islands_engine, "~> 0.2"},
       {:islands_request, "~> 0.1"},
       {:islands_tally, "~> 0.1"},
