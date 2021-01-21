@@ -4,7 +4,7 @@ defmodule Islands.Client.GameOver.MixProject do
   def project do
     [
       app: :islands_client_game_over,
-      version: "0.1.15",
+      version: "0.1.16",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       name: "Islands Client Game Over",
@@ -52,9 +52,7 @@ defmodule Islands.Client.GameOver.MixProject do
       {:islands_client_state, "~> 0.1"},
       {:islands_engine, "~> 0.2"},
       {:islands_request, "~> 0.1"},
-      {:islands_tally, "~> 0.1"},
-      {:mix_tasks,
-       github: "RaymondLoranger/mix_tasks", only: :dev, runtime: false}
+      {:islands_tally, "~> 0.1"}
     ]
   end
 end
