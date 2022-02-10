@@ -4,7 +4,7 @@ defmodule Islands.Client.GameOver.MixProject do
   def project do
     [
       app: :islands_client_game_over,
-      version: "0.1.23",
+      version: "0.1.24",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       name: "Islands Client Game Over",
@@ -22,7 +22,7 @@ defmodule Islands.Client.GameOver.MixProject do
 
   defp description do
     """
-    Handles a game over state in the Game of Islands.
+    Reacts to a "game over" state in the Game of Islands.
     """
   end
 

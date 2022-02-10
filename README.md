@@ -1,6 +1,6 @@
 # Islands Client Game Over
 
-Handles a _game over_ state in the _Game of Islands_.
+Reacts to a "game over" state in the _Game of Islands_.
 
 ## Installation
 

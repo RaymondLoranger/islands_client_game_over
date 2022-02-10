@@ -3,7 +3,7 @@
 # └─────────────────────────────────────────────────────────────────┘
 defmodule Islands.Client.GameOver do
   @moduledoc """
-  Handles a _game over_ state in the _Game of Islands_.
+  Reacts to a "game over" state in the _Game of Islands_.
 
   ##### Inspired by the course [Elixir for Programmers](https://codestool.coding-gnome.com/courses/elixir-for-programmers) by Dave Thomas.
   """
@@ -13,24 +13,33 @@ defmodule Islands.Client.GameOver do
   alias Islands.Client.State
   alias Islands.{Engine, Tally}
 
+  @doc """
+  Reacts to a "game over" state.
+  """
   @spec end_game(State.t()) :: no_return
   def end_game(%State{} = state), do: message(state) |> end_game(state)
 
+  @doc """
+  Prints a message and ends the game.
+  """
   @spec end_game(ANSI.ansilist(), State.t()) :: no_return
   def end_game(message, %State{game_name: game_name} = state) do
     :ok = Tally.summary(state.tally, state.player_id)
     :ok = ANSI.puts(message)
-    :ok = Engine.end_game(game_name)
+    # Game may already have been ended by the other client player.
+    Engine.end_game(game_name)
     :ok = clear_messages()
     self() |> Process.exit(:normal)
   end
 
+  ## Private functions
+
   @spec message(State.t()) :: ANSI.ansilist()
-  def message(%State{tally: %Tally{request: request}} = state),
+  defp message(%State{tally: %Tally{request: request}} = state),
     do: Message.new(state, request)
 
   @spec clear_messages :: :ok
-  def clear_messages do
+  defp clear_messages do
     receive do
       _ -> clear_messages()
     after

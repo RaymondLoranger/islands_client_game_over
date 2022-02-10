@@ -1,8 +1,15 @@
 defmodule Islands.Client.GameOver.Message.GuessCoord do
+  @moduledoc """
+  Returns a "game over" message after a `:guess_coord` request.
+  """
+
   alias IO.ANSI.Plus, as: ANSI
   alias Islands.Client.State
   alias Islands.Tally
 
+  @doc """
+  Returns a "game over" message after a `:guess_coord` request.
+  """
   @spec message(State.t()) :: ANSI.ansilist()
   def message(
         %State{
