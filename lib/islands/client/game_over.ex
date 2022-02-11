@@ -26,6 +26,16 @@ defmodule Islands.Client.GameOver do
   def end_game(message, %State{game_name: game_name} = state) do
     :ok = Tally.summary(state.tally, state.player_id)
     :ok = ANSI.puts(message)
+
+    for _ <- 11 do
+      IO.inspect(
+        {state.player_id, Engine.game_pid(game_name)},
+        label: :game_pid
+      )
+
+      Process.sleep(10)
+    end
+
     # Game may already have been ended by the other client player.
     if Engine.game_pid(game_name), do: Engine.end_game(game_name)
     :ok = clear_messages()
