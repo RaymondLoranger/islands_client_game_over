@@ -27,7 +27,7 @@ defmodule Islands.Client.GameOver do
     :ok = Tally.summary(state.tally, state.player_id)
     :ok = ANSI.puts(message)
 
-    for _ <- 11 do
+    for _ <- 0..11 do
       IO.inspect(
         {state.player_id, Engine.game_pid(game_name)},
         label: :game_pid
