@@ -17,10 +17,11 @@ defmodule Islands.Client.GameOver do
   Prints a message and ends the game.
   """
   @spec end_game(State.t(), boolean) :: no_return
-  def end_game(%State{game_name: game_name} = state, notified? \\ true) do
+  def end_game(%State{game_name: game_name} = state, notified? \\ false) do
     :ok = Tally.summary(state.tally, state.player_id)
     :ok = message(state) |> ANSI.puts()
-    # Only the notified player stops the game to avoid stopping it twice.
+    # Only the notified player requests to stop the game server.
+    # Therefore, we do not try to stop the server a second time.
     if notified?, do: Engine.end_game(game_name)
     :ok = clear_messages()
     self() |> Process.exit(:normal)
