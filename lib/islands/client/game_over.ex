@@ -14,23 +14,16 @@ defmodule Islands.Client.GameOver do
   alias Islands.{Engine, Tally}
 
   @doc """
-  Reacts to a "game over" state.
-  """
-  @spec end_game(State.t()) :: no_return
-  def end_game(%State{} = state), do: message(state) |> end_game(state)
-
-  @doc """
   Prints a message and ends the game.
   """
-  @spec end_game(ANSI.ansilist(), State.t()) :: no_return
-  def end_game(message, %State{game_name: game_name} = state) do
+  @spec end_game(State.t(), boolean) :: no_return
+  def end_game(%State{game_name: game_name} = state, notified?) do
     :ok = Tally.summary(state.tally, state.player_id)
-    :ok = ANSI.puts(message)
-    IO.inspect(state, label: :client_state)
-    # Game may already have been ended by the other client player.
-    :ok = Engine.end_game(game_name)
+    :ok = message(state) |> ANSI.puts()
+    # Only the notified player stops the game.
+    if notified?, do: Engine.end_game(game_name)
     :ok = clear_messages()
-    true = self() |> Process.exit(:normal)
+    self() |> Process.exit(:normal)
   end
 
   ## Private functions
