@@ -14,13 +14,13 @@ defmodule Islands.Client.GameOver do
   alias Islands.{Engine, Tally}
 
   @doc """
-  Prints a message and exits the game.
+  Prints game summary, message and exits the game.
   """
-  @spec exit(State.t(), boolean) :: no_return
-  def exit(%State{game_name: game_name} = state, end_game? \\ true) do
+  @spec exit(State.t(), Keyword.t()) :: no_return
+  def exit(%State{} = state, option \\ [end_game: true]) do
     :ok = Tally.summary(state.tally, state.player_id)
     :ok = message(state) |> ANSI.puts()
-    if end_game?, do: Engine.end_game(game_name)
+    if option[:end_game], do: Engine.end_game(state.game_name)
     :ok = clear_messages()
     self() |> Process.exit(:normal)
   end
