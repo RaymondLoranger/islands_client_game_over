@@ -14,15 +14,13 @@ defmodule Islands.Client.GameOver do
   alias Islands.{Engine, Tally}
 
   @doc """
-  Prints a message and ends the game.
+  Prints a message and exits the game.
   """
-  @spec end_game(State.t(), boolean) :: no_return
-  def end_game(%State{game_name: game_name} = state, notified? \\ false) do
+  @spec exit(State.t(), boolean) :: no_return
+  def exit(%State{game_name: game_name} = state, end_game? \\ true) do
     :ok = Tally.summary(state.tally, state.player_id)
     :ok = message(state) |> ANSI.puts()
-    # Only the notified player requests to stop the game server.
-    # Therefore, we do not try to stop the server a second time.
-    if notified?, do: Engine.end_game(game_name)
+    if end_game?, do: Engine.end_game(game_name)
     :ok = clear_messages()
     self() |> Process.exit(:normal)
   end
