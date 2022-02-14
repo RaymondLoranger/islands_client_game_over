@@ -14,7 +14,7 @@ defmodule Islands.Client.GameOver do
   alias Islands.{Engine, Tally}
 
   @doc """
-  Prints game summary, message and exits the game.
+  Prints a game summary, a message and exits the game.
   """
   @spec exit(State.t(), Keyword.t()) :: no_return
   def exit(%State{} = state, option \\ [end_game: true]) do

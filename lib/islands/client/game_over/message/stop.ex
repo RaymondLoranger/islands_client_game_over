@@ -1,6 +1,6 @@
 defmodule Islands.Client.GameOver.Message.Stop do
   @moduledoc """
-  Returns a "game over" message after a `:stop` request.
+  Returns a "game over" message after a stop request.
   """
 
   alias IO.ANSI.Plus, as: ANSI
@@ -8,7 +8,7 @@ defmodule Islands.Client.GameOver.Message.Stop do
   alias Islands.Tally
 
   @doc """
-  Returns a "game over" message after a `:stop` request.
+  Returns a "game over" message after a stop request.
   """
   @spec message(State.t()) :: ANSI.ansilist()
   def message(

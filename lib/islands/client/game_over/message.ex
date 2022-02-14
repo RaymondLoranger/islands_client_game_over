@@ -1,6 +1,6 @@
 defmodule Islands.Client.GameOver.Message do
   @moduledoc """
-  Returns a "game over" message after a `:guess_coord` or `:stop` request.
+  Returns a "game over" message after a guess or stop request.
   """
 
   alias __MODULE__.{GuessCoord, Other, Stop}
@@ -9,7 +9,7 @@ defmodule Islands.Client.GameOver.Message do
   alias Islands.Request
 
   @doc """
-  Returns a "game over" message after a `:guess_coord` or `:stop` request.
+  Returns a "game over" message after a guess or stop request.
   """
   @spec new(State.t(), Request.t()) :: ANSI.ansilist()
   def new(state, {:guess_coord, _player_id, _row, _col} = _request),
