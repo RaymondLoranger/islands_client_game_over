@@ -16,7 +16,7 @@ defmodule Islands.Client.GameOver do
   @doc """
   Prints a game summary, a message and exits the game.
   """
-  @spec exit(State.t(), Keyword.t()) :: no_return
+  @spec exit(State.t(), keyword) :: no_return
   def exit(%State{} = state, option \\ [end_game: true]) do
     :ok = Tally.summary(state.tally, state.player_id)
     :ok = message(state) |> ANSI.puts()
